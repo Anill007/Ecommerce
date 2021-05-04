@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="{% url 'allProducts' %}">ALL PRODUCTS</a>
+        <table>
+            <tr>
+                <th>Cart ID</th>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Seller Id</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+            <tbody>
+            {% for item in cart_items %}           
+                <tr>
+                    <td>{{item.0}}</td>
+                    <td>{{item.1}}</td>
+                    <td>{{item.2}}</td>
+                    <td>{{item.3}}</td>
+                    <td>{{item.4}}</td>
+                    <td>
+                        <a href="{% url 'updateQuantity' id=item.0 add=1 sub=0%}">INCREASE</a>
+                        <a href="{% url 'updateQuantity' id=item.0 add=0 sub=1 %}">DECREASE</a>
+                        <a href="{% url 'deleteCartItem' id=item.0 %}">DELETE</a>
+                        <a href="{% url 'confirmOrder' id=item.1 seller_id=item.3 cart_id=item.0%}">CONFIRM ORDER</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </body>
+
+</html>
