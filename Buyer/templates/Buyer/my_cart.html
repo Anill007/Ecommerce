@@ -47,7 +47,7 @@
                         <a href="{% url 'updateQuantity' id=item.0 add=1 sub=0%}">INCREASE</a>
                         <a href="{% url 'updateQuantity' id=item.0 add=0 sub=1 %}">DECREASE</a>
                         <a href="{% url 'deleteCartItem' id=item.0 %}">DELETE</a>
-                        <a href="{% url 'confirmOrder' id=item.1 seller_id=item.3 cart_id=item.0%}">CONFIRM ORDER</a>
+                        <a href="{% url 'confirmOrder' id=item.1 seller_id=item.3 cart_id=item.0 quantity=item.4%}">CONFIRM ORDER</a>
                     </td>
                 </tr>
             {% endfor %}

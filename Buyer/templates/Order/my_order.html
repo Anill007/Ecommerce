@@ -5,14 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+    
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
+    <table>
+        <thead>
+            <tr>
+                <td>Order ID</td>
+                <td>Seller ID</td>
+                <td>Product ID</td>
+                <td>Product Name</td>
+                <td>Image</td>
+                <td>Details</td>
+                <td>Price</td>
+                <td>Model</td>
+                <td>Category</td>
+            </tr>
+        </thead>
+        <tbody>
+    
     {% for order in orders %}
-    {{order.order_id}}
-    {{oder.buyer_id}}
-    {{oder.seller_id}}
-    {{oder.product_id}}
+    
+        <tr>
+            <td>{{order.0}}</td>
+            <td>{{order.3}}</td>
+            <td>{{order.2}}</td>
+            <td>{{order.6}}</td>
+            <td>{{order.7}}</td>
+            <td>{{order.8}}</td>
+            <td>{{order.9}}</td>
+            <td>{{order.10}}</td>
+            <td>{{order.11}}</td>
+        </tr>
+    
     {% endfor %}
+    </tbody>
+    </table>
     
 </body>
 </html>

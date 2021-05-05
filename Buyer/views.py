@@ -35,6 +35,7 @@ def myCart(request):
                     )WHERE "Buyer_cart".buyer_id_id = %s ORDER BY "Buyer_cart".cart_id'''
         cursor.execute(query, [request.session["b_id"], ])
         cart_items = cursor.fetchall()
+        cursor.close()
         print(cart_items)
         context = {"cart_items": cart_items}
         return render(request, 'Buyer/my_cart.html', context)
@@ -68,20 +69,24 @@ def deleteCartItem(request, id):
     return redirect("myCart")
 
 
-def confirmOrder(request, id, seller_id, cart_id):
+def confirmOrder(request, id, seller_id, cart_id, quantity):
     if request.session["b_id"]:
         product_instance = Product.objects.get(
             product_id=id, seller_id=seller_id)
         seller_instance = Seller.objects.get(seller_id=seller_id)
         buyer_instance = Buyer.objects.get(buyer_id=request.session["b_id"])
         Order(product=product_instance,
-              seller=seller_instance, buyer=buyer_instance).save()
+              seller=seller_instance, buyer=buyer_instance, quantity=quantity).save()
         Cart.objects.get(
             cart_id=cart_id, buyer_id=request.session["b_id"]).delete()
     return redirect("myCart")
 
 
 def myOrder(request):
-    myOrders = Order.objects.filter(buyer_id=request.session["b_id"])
+    cursor = connection.cursor()
+    query = '''SELECT * FROM "Buyer_order"
+    INNER JOIN "Ecom1_product" ON "Ecom1_product".product_id = "Buyer_order".product_id '''
+    cursor.execute(query, [])
+    myOrders = cursor.fetchall()
     context = {"orders": myOrders}
     return render(request, "Order/my_order.html", context)

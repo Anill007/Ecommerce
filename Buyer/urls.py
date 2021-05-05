@@ -10,7 +10,7 @@ urlpatterns = [
     path('updateQuantity/<int:id>/<int:add>/<int:sub>/',
          views.updateQuantity, name="updateQuantity"),
     path('deleteCartItem/<int:id>/', views.deleteCartItem, name="deleteCartItem"),
-    path('confirmOrder/<int:id>/<int:seller_id>/<int:cart_id>',
+    path('confirmOrder/<int:id>/<int:seller_id>/<int:cart_id>/<int:quantity>',
          views.confirmOrder, name="confirmOrder"),
     path('myOrder/', views.myOrder, name="myOrder")
 

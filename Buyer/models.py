@@ -33,9 +33,10 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.order_id
+        return f'{self.order_id}'
 
     class Meta:
         verbose_name_plural = "Orders"
