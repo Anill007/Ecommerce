@@ -14,6 +14,9 @@
 </head>
 <body>
     <a href="{% url 'myCart' %}"><h1>GOTO MY CART</h1></a> 
+    <a href="{% url 'myOrder' %}">
+        <h1>GOTO MY ORDERS</h1>
+    </a>
     {% for product in products %}
     <h3>Name:{{product.product_name}}</h3>
     <img src="http://127.0.0.1:8000/media/{{product.product_image}}">

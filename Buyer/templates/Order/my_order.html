@@ -31,12 +31,12 @@
                 <td>Order ID</td>
                 <td>Seller ID</td>
                 <td>Product ID</td>
+                <td>Status</td>
                 <td>Product Name</td>
                 <td>Image</td>
                 <td>Details</td>
                 <td>Price</td>
-                <td>Model</td>
-                <td>Category</td>
+                <td>Ordered On</td>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +48,11 @@
             <td>{{order.3}}</td>
             <td>{{order.2}}</td>
             <td>{{order.6}}</td>
-            <td>{{order.7}}</td>
             <td>{{order.8}}</td>
-            <td>{{order.9}}</td>
+            <td><img src="http://127.0.0.1:8000/media/{{order.9}}" alt="{{order.9}}" style="height:100px; width:100px"></td>
             <td>{{order.10}}</td>
             <td>{{order.11}}</td>
+            <td>{{order.5}}</td>
         </tr>
     
     {% endfor %}

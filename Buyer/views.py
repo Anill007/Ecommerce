@@ -7,7 +7,7 @@ from django.db import connection
 
 
 def bLogin(request):
-    request.session["b_id"] = 1
+    request.session["b_id"] = 3
     return HttpResponse("buyer logged in")
 
 
@@ -84,9 +84,10 @@ def confirmOrder(request, id, seller_id, cart_id, quantity):
 
 def myOrder(request):
     cursor = connection.cursor()
-    query = '''SELECT * FROM "Buyer_order"
-    INNER JOIN "Ecom1_product" ON "Ecom1_product".product_id = "Buyer_order".product_id '''
-    cursor.execute(query, [])
+    query = ''' SELECT * FROM "Buyer_order"
+    INNER JOIN "Ecom1_product" ON "Ecom1_product".product_id = "Buyer_order".product_id 
+    WHERE "Buyer_order".buyer_id = %s '''
+    cursor.execute(query, [request.session["b_id"]])
     myOrders = cursor.fetchall()
     context = {"orders": myOrders}
     return render(request, "Order/my_order.html", context)
