@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from . import myApis
 
 urlpatterns = [
     path('home/', views.home, name="home"),
@@ -15,4 +16,9 @@ urlpatterns = [
     # api
     path('products/', views.products),
     path('product/<int:id>/', views.product),
+
+    # myApis
+    path('api_products/', myApis.productListAPI),
+    path('api_product/', myApis.updateProductAPI)
+
 ]
