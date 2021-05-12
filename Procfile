@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT Ecom.wsgi:application
+web: gunicorn Ecom.wsgi --log-file -
