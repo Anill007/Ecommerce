@@ -25,8 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Ecom1/', include('Ecom1.urls')),
     path('Buyer/', include('Buyer.urls')),
-    re_path(r'^media/(?p<path>.*)$', serve,
-            {'document-root': settings.MEDIA_ROOT}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL,
