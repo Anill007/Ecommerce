@@ -7,7 +7,7 @@ from django.db import connection
 
 
 def bLogin(request):
-    request.session["b_id"] = 3
+    request.session["b_id"] = 1
     return HttpResponse("buyer logged in")
 
 

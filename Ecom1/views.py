@@ -13,7 +13,7 @@ from django.db import connection
 
 
 def home(request):
-    request.session['id'] = 4
+    request.session['id'] = 1
     return HttpResponse(f"seller logged in id= {request.session['id'] }")
 
 
