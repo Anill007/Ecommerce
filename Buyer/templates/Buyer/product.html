@@ -10,7 +10,7 @@
     {% for key, value in product.items %}
         <h3>{{key}}: {{value}}</h3>
     {% endfor %}
-    <img style="height:200px; width:200px;" src="http://127.0.0.1:8000/media/{{product.product_image}}" alt="" srcset="">
+    <img style="height:200px; width:200px;" src="http://newtry1477.herokuapp.com/media/{{product.product_image}}" alt="" srcset="">
     <a href="{% url 'addToCart' id=product.product_id%}">ADD TO CART</a>
 </body>
 </html>
