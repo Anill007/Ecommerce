@@ -100,7 +100,8 @@ def deleteProduct(request):
 
 def orderRequests(request):
     cursor = connection.cursor()
-    query = ''' SELECT * FROM "Buyer_order"
+    query = ''' SELECT "Buyer_order".order_id, "Buyer_order".buyer_id, "Buyer_order".seller_id, "Buyer_order".quantity, "Buyer_order".order_placed, "Buyer_order".order_status, 
+    "Ecom1_product".product_id, "Ecom1_product".product_name, "Ecom1_product".product_image, "Ecom1_product".product_price FROM "Buyer_order"
             INNER JOIN "Ecom1_product" ON "Ecom1_product".product_id = "Buyer_order".product_id
             WHERE "Ecom1_product".seller_id_id = %s ORDER BY "Buyer_order".order_id'''
     cursor.execute(query, [request.session['id'], ])

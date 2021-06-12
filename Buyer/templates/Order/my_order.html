@@ -30,13 +30,12 @@
             <tr>
                 <td>Order ID</td>
                 <td>Seller ID</td>
-                <td>Product ID</td>
-                <td>Status</td>
-                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>Order Placed</td>
+                <td>Order status</td>
+                <td>product ID</td>
                 <td>Image</td>
-                <td>Details</td>
                 <td>Price</td>
-                <td>Ordered On</td>
             </tr>
         </thead>
         <tbody>
@@ -45,14 +44,13 @@
     
         <tr>
             <td>{{order.0}}</td>
-            <td>{{order.3}}</td>
+            <td>{{order.1}}</td>
             <td>{{order.2}}</td>
-            <td>{{order.6}}</td>
-            <td>{{order.8}}</td>
-            <td><img src="/media/{{order.9}}" alt="{{order.9}}" style="height:100px; width:100px"></td>
-            <td>{{order.10}}</td>
-            <td>{{order.11}}</td>
+            <td>{{order.3}}</td>
+            <td>{{order.4}}</td>
             <td>{{order.5}}</td>
+            <td><img src="/media/{{order.6}}" alt="{{order.6}}" style="height:100px; width:100px"></td>
+            <td>{{order.7}}</td>
         </tr>
     
     {% endfor %}

@@ -93,10 +93,12 @@ def confirmOrder(request, id, seller_id, cart_id, quantity):
 
 def myOrder(request):
     cursor = connection.cursor()
-    query = ''' SELECT * FROM "Buyer_order"
+    query = ''' SELECT "Buyer_order".order_id, "Buyer_order".seller_id, "Buyer_order".quantity, "Buyer_order".order_placed, "Buyer_order".order_status,
+    "Ecom1_product".product_id,"Ecom1_product".product_image,"Ecom1_product".product_price FROM "Buyer_order"
     INNER JOIN "Ecom1_product" ON "Ecom1_product".product_id = "Buyer_order".product_id 
     WHERE "Buyer_order".buyer_id = %s '''
     cursor.execute(query, [request.session["b_id"]])
     myOrders = cursor.fetchall()
+    print(type(myOrders))
     context = {"orders": myOrders}
     return render(request, "Order/my_order.html", context)
