@@ -15,4 +15,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Ecom.settings')
 
 application = get_wsgi_application()
 application = WhiteNoise(application, root='staticfiles')
-# application.add_files('/path/to/more/static/files', prefix='more-files/')
