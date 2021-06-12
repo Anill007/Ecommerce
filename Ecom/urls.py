@@ -22,7 +22,7 @@ import Ecom1
 from django.views.static import serve
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('Ecom1/', include('Ecom1.urls')),
     path('Buyer/', include('Buyer.urls')),
 ]
