@@ -8,7 +8,29 @@
 </head>
 <body>
     <form action="{% url 'pAdd' %}" method="post" enctype="multipart/form-data">
-        {{form.as_p}}
+        {% csrf_token %}
+        <label for="id_product_name">Product name:</label> 
+        <input type="text" name="product_name" maxlength="100" required id="id_product_name">
+
+        <label for="id_product_image">Product image:</label> 
+        <input type="file" name="product_image" accept="image/*" required id="id_product_image">
+        
+        <label for="id_product_details">Product details:</label>
+        <input type="text" name="product_details" maxlength="100" required id="id_product_details">
+        
+        <label for="id_product_price">Product price:</label>
+        <input type="number" name="product_price" step="any" required id="id_product_price">
+        
+        <label for="id_product_model">Product model:</label>
+        <input type="text" name="product_model" maxlength="100" required id="id_product_model">
+        
+        <label for="id_product_category">Product category:</label> 
+        <input type="text" name="product_category" maxlength="50" required id="id_product_category">
+        
+        <label for="id_seller_id">Seller id:</label>
+        <select name="seller_id" required id="id_seller_id">
+                <option value="{{sid}}">{{sid}}</option> 
+        </select>
         <input type="submit" value="ADD PRODUCT">
     </form>
 </body>

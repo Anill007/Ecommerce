@@ -17,13 +17,17 @@
     <a href="{% url 'myOrder' %}">
         <h1>GOTO MY ORDERS</h1>
     </a>
+    {% if products %}
     {% for product in products %}
     <h3>Name:{{product.product_name}}</h3>
-    <img src="http://newtry1477.herokuapp.com/media/{{product.product_image}}">
+    <img src="{{MEDIA_URL}}{{product.product_image}}">
     <h3>Price: NRs {{product.product_price}}</h3>
     <button><a href="{% url 'productDetails' product.product_id %}">DETAILS</a></button>
     <hr>
     {% endfor %}
+    {% else %}
+    <h1>No any data</h1>
+    {% endif %}
     
 </body>
 </html>

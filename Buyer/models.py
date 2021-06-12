@@ -11,6 +11,7 @@ class Buyer(models.Model):
 
     buyer_id = models.AutoField(primary_key=True)
     buyer_name = models.CharField(max_length=50)
+    buyer_password = models.CharField(max_length=50)
 
     def __str__(self):
         return f'{self.buyer_id}'

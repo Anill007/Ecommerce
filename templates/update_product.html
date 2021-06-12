@@ -11,7 +11,34 @@
     <body>
         <form action="{% url 'pUpdate' id %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{form.as_p}}
+            <label for="id_product_name">Product name:</label>
+            <input type="text" name="product_name" maxlength="100" required id="id_product_name"
+                value="{{form.product_name.value}}">
+            
+            <label for="id_product_image">Product image:</label>
+            <p>Current: {{form.product_image.value}}</p>
+            <input type="file" name="product_image" accept="image/*" id="id_product_image">
+            
+            <label for="id_product_details">Product details:</label>
+            <input type="text" name="product_details" maxlength="100" required id="id_product_details"
+                value="{{form.product_details.value}}">
+            
+            <label for="id_product_price">Product price:</label>
+            <input type="number" name="product_price" step="any" required id="id_product_price"
+                value="{{form.product_price.value}}">
+            
+            <label for="id_product_model">Product model:</label>
+            <input type="text" name="product_model" maxlength="100" required id="id_product_model"
+                value="{{form.product_model.value}}">
+            
+            <label for="id_product_category">Product category:</label>
+            <input type="text" name="product_category" maxlength="50" required id="id_product_category"
+                value="{{form.product_category.value}}">
+            
+            <label for="id_seller_id">Seller id:</label>
+            <select name="seller_id" required id="id_seller_id">
+                <option value="{{form.seller_id.value}}" selected>{{form.seller_id.value}}</option>
+            </select>
             <input type="submit" value="UPDATE PRODUCT">
         </form>
         <form action="{% url 'pDelete' %}" method="post">

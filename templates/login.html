@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eshopping</title>
+</head>
+<body>
+
+    <form onsubmit="event.preventDefault(); checkLoginType();" id="loginForm" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="username"><br>
+        <input type="text" name="password" placeholder="password"><br>
+
+        <input type="radio" id="buyer"  name="type" value="buyer" checked>
+        <label for="buyer">Buyer</label>
+        <input type="radio" id="seller" name="type" value="seller">
+        <label for="seller">Seller</label><br>
+
+        <input type="submit" value="LOGIN">
+    </form>
+    
+
+    <script>
+        function checkLoginType(){
+                let loginType="";
+                if(document.getElementById("buyer").checked){
+                    loginType = "/Buyer/login";
+                }
+                else if (document.getElementById("seller").checked) {
+                  loginType = "/Ecom1/login";
+                }
+                let loginForm = document.getElementById("loginForm");
+                loginForm.setAttribute("action",loginType);
+                loginForm.submit();
+            }
+            
+    </script>
+</body>
+</html>

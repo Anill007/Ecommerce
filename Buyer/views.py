@@ -7,8 +7,16 @@ from django.db import connection
 
 
 def bLogin(request):
-    request.session["b_id"] = 1
-    return HttpResponse("buyer logged in")
+    if(request.method == "POST" and request.POST["type"] == "buyer"):
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = Buyer.objects.get(
+            buyer_name=username, buyer_password=password)
+        if user:
+            request.session["b_id"] = user.buyer_id
+            return redirect("allProducts")
+        else:
+            return HttpResponse("No user found.")
 
 
 def allProducts(request):
@@ -44,7 +52,8 @@ def myCart(request):
 def addToCart(request, id):
     buyer_instance = Buyer.objects.get(buyer_id=request.session["b_id"])
     product_instance = Product.objects.get(product_id=id)
-    newItem = Cart(product_id=product_instance, buyer_id=buyer_instance)
+    newItem = Cart(product_id=product_instance,
+                   buyer_id=buyer_instance)
     newItem.save()
     return redirect("allProducts")
 

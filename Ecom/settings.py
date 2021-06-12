@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 import os
 
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-l0dpa5(0bw3f9&xet0v5dk3bq6g=8iqt4q7e^^fn51h=07mm0a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -76,16 +78,31 @@ WSGI_APPLICATION = 'Ecom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd8hmk81m995pfl',  # dbname
+#         'USER': 'eycnhtzhahvpxd',
+#         'PASSWORD': '83af85c58e1e7b9646f5f50af4ce88f169fab51e6e992415a30f193e37720289',
+#         'HOST': 'ec2-52-6-77-239.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8hmk81m995pfl',  # dbname
-        'USER': 'eycnhtzhahvpxd',
-        'PASSWORD': '83af85c58e1e7b9646f5f50af4ce88f169fab51e6e992415a30f193e37720289',
-        'HOST': 'ec2-52-6-77-239.compute-1.amazonaws.com',
+        'NAME': 'finalyear1',  # dbname
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -3,8 +3,9 @@ from . import views
 from . import myApis
 
 urlpatterns = [
-    path('home/', views.home, name="home"),
-    path('', views.productsList, name="plist"),
+    path('', views.home, name="home"),
+    path('login', views.sLogin, name="sLogin"),
+    path('allProducts/', views.productsList, name="plist"),
     path('add_product/', views.addProduct, name="pAdd"),
     path('update_product/<int:pk>/', views.updateProduct, name="pUpdate"),
     path('delete_product/', views.deleteProduct, name="pDelete"),

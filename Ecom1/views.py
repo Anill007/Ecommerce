@@ -13,22 +13,34 @@ from django.db import connection
 
 
 def home(request):
-    request.session['id'] = 1
-    return HttpResponse(f"seller logged in id= {request.session['id'] }")
+    return render(request, "login.html")
 
+
+def sLogin(request):
+    if(request.method == "POST" and request.POST["type"] == "seller"):
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = models.Seller.objects.get(
+            seller_name=username, seller_password=password)
+        if user:
+            request.session["id"] = user.seller_id
+            return redirect("plist")
+        else:
+            return HttpResponse("No user found.")
 
 # 1.for getting all lists of products
+
+
 def productsList(request):
     user_id = request.session['id']
     all_products = models.Product.objects.filter(seller_id=user_id)
-    context = {"list": all_products}
+    context = {"list": all_products, "sid": request.session['id']}
     if all_products:
         return render(request, 'products_list.html', context)
     else:
-        return HttpResponse("<h1><a href='../../Ecom1/add_product'>Add a new product.</a></h1><h1>Error: Obj not found.</h1>")
+        return HttpResponse("<h1><a href='../../Ecom1/add_product'>Add a new product.</a></h1><h1>No Products Added.</h1>")
 
 
-@csrf_exempt
 def addProduct(request):
     if request.method == "POST":
         # request params
@@ -55,7 +67,7 @@ def addProduct(request):
         return redirect("plist")  # change url in browser + content
 
     pForm = forms.ProductForm()
-    context = {'form': pForm}
+    context = {'form': pForm, "sid": request.session['id']}
     return render(request, 'add_product.html', context)
 
 
