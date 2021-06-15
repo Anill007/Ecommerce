@@ -50,3 +50,18 @@ class Order(models.Model):
 
     class Meta:
         verbose_name_plural = "Orders"
+
+class Ratings(models.Model):
+    rating_id = models.AutoField(primary_key=True)
+    user_id = models.IntegerField()
+    user_name = models.CharField(max_length=50)
+    p_a = models.CharField(max_length=50, blank=True, null=True)
+    p_b = models.CharField(max_length=50, blank=True, null=True)
+    p_c = models.CharField(max_length=50, blank=True, null=True)
+    r_a = models.IntegerField( blank=True, null=True)
+    r_b = models.IntegerField( blank=True, null=True)
+    r_c = models.IntegerField(blank=True, null=True)
+    status = models.IntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = "Ratings"

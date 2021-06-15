@@ -23,6 +23,23 @@
         <input class="btn btn-danger" type="submit" value="LOGIN">
     </form>
     
+    <br>
+    <br>
+    <h1>Not a user yet. Sign Up</h1>
+    <form action="/Ecom1/signup" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="username"><br>
+        <input type="text" name="password" placeholder="password"><br>
+        <input type="text" name="repassword" placeholder="reenter password"><br>
+
+        <input type="radio" id="buyer" name="type" value="buyer" checked>
+        <label for="buyer">Buyer</label>
+        <input type="radio" id="seller" name="type" value="seller">
+        <label for="seller">Seller</label><br>
+
+        <input class="btn btn-danger" type="submit" value="LOGIN">
+    </form>
+    
 
     <script>
         function checkLoginType(){

@@ -27,7 +27,7 @@ class Product(models.Model):
     seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.product_id}{self.product_name}'
+        return f'{self.product_id}'
 
     def delete(self, *args, **kwargs):
         path_str = self.product_image.delete()

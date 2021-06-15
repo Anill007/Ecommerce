@@ -2,13 +2,63 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from . import forms
 from . import models
-import json
 from . import serializer
-from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
-from Buyer.models import Order
+from Buyer.models import Order,Buyer
 from django.db import connection
+import shutil,os
+
+# ml modules
+import pandas as pd
+from scipy import sparse
+from sklearn.metrics.pairwise import cosine_similarity
+
+# ml codes
+
+
+def resetCSV(request):
+    dict = {"UserProduct": []}
+    df = pd.DataFrame(dict)
+    df.to_csv('try1.csv', index=False)
+
+    # addNewProduct("iphone")
+    # addNewProduct("samsung")
+    # addNewProduct("nokia")
+
+    # addNewUser("anil")
+    # addNewUser("rick")
+    # addNewUser("larry")
+    # addNewUser("dave")
+
+    # changeIndexValue(0, "nokia", 5)
+    # changeIndexValue(0, "samsung", 1)
+    # changeIndexValue(1, "samsung", 5)
+    # changeIndexValue(3, "iphone", 5)
+
+    return HttpResponse("csv cleared.")
+
+
+def addNewProduct(request,new_index):
+    file_data = pd.read_csv('try1.csv')
+    new_column = [0] * (file_data.shape[0])
+    file_data[new_index] = new_column
+    file_data.to_csv('try1.csv', index=False)
+
+
+def addNewUser(name):
+    file_data = pd.read_csv('try1.csv')
+    file_data.loc[file_data.shape[0]] = [name]+([0]*(file_data.shape[1]-1))
+    file_data.to_csv('try1.csv', index=False)
+
+
+def changeIndexValue(v, h, value):
+    file_data = pd.read_csv('try1.csv')
+    file_data.at[v, h] = value
+    print(file_data.to_string(index=False))
+    file_data.to_csv('try1.csv', index=False)
+
+# Other backend logic
 # Create your views here.
 
 
@@ -60,7 +110,8 @@ def addProduct(request):
         # ----------------
         pForm = forms.ProductForm(request.POST, request.FILES)
         if pForm.is_valid():
-            pForm.save()
+            new_item_index=pForm.save()
+            addNewProduct(request,str(new_item_index))
         # product_instance = models.Product(0,product_name, product_image, product_details, product_price, product_model, product_category, 3)
         # product_instance.save()
 
@@ -174,3 +225,67 @@ def product(request, id):
         product = models.Product.objects.get(product_id=id)
         product.delete()
         return HttpResponse("success")
+
+
+def resetAll(request):
+
+    cursor = connection.cursor()
+    cursor.execute('''TRUNCATE TABLE "Buyer_cart" RESTART IDENTITY CASCADE''')
+    cursor.execute('''TRUNCATE TABLE "Buyer_buyer" RESTART IDENTITY CASCADE''')
+    cursor.execute('''TRUNCATE TABLE "Buyer_order" RESTART IDENTITY CASCADE''')
+    cursor.execute(
+        '''TRUNCATE TABLE "Ecom1_product" RESTART IDENTITY CASCADE''')
+    cursor.execute(
+        '''TRUNCATE TABLE "Ecom1_seller" RESTART IDENTITY CASCADE''')
+    cursor.execute(
+        '''TRUNCATE TABLE "Buyer_ratings" RESTART IDENTITY CASCADE''')
+    cursor.close()
+    return HttpResponse("success")
+
+def resetMedia(request):
+    shutil.rmtree('media')   
+    os.makedirs('media')
+
+    return HttpResponse("success")
+
+
+
+def signUp(request):
+    if (request.method == "POST"):
+        username = request.POST["username"]
+        password = request.POST["password"]
+        password1 = request.POST["repassword"]
+        type = request.POST["type"]
+
+        if(password == password1):
+            cursor = connection.cursor()
+
+            if type == "buyer":
+                cursor.execute(
+                    ''' SELECT exists(select * from "Buyer_buyer" where buyer_name = %s) ''', [username, ])
+                res = cursor.fetchone()
+                if res[0]:
+                    return HttpResponse("user already exists.")
+                else:
+                    cursor.execute(''' INSERT INTO "Buyer_buyer"(buyer_name, buyer_password) values (%s,%s)''', [
+                        username, password])
+                    new_buyer = Buyer.objects.get(buyer_name = username)
+                    cursor.execute(''' INSERT INTO "Buyer_ratings" (user_id,user_name,status)
+                    VALUES(%s, %s, %s)''',[new_buyer.buyer_id,new_buyer.buyer_name,0])
+                    cursor.close()
+                    addNewUser(username)
+                    return HttpResponse("Successfully Created")
+
+            elif type == "seller":
+                cursor.execute(
+                    ''' SELECT exists(select * from "Ecom1_seller" where seller_name = %s) ''', [username, ])
+                res = cursor.fetchone()
+                if res[0]:
+                    return HttpResponse("user already exists.")
+                else:
+                    cursor.execute(''' INSERT INTO "Ecom1_seller"(seller_name, seller_password) values (%s,%s)''', [
+                        username, password])
+                    cursor.close()
+                    return HttpResponse("Successfully Created")
+        else:
+            return HttpResponse("retype password.")

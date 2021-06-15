@@ -3,6 +3,10 @@ from . import views
 from . import myApis
 
 urlpatterns = [
+     path('resetMedia', views.resetMedia, name="resetMedia"),
+    path('resetCSV', views.resetCSV, name="resetCSV"),
+    path('resetAll', views.resetAll, name="resetAll"),
+    path('signup', views.signUp, name="signUp"),
     path('', views.home, name="home"),
     path('login', views.sLogin, name="sLogin"),
     path('allProducts/', views.productsList, name="plist"),

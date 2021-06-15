@@ -5,12 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/108fa96efa.js" crossorigin="anonymous"></script>
+    <style>
+        i{
+            color: black;
+        }
+
+        .rated{
+            color: red;
+        }
+    </style>
 </head>
 <body>
+    <h1><a href="{% url 'allProducts' %}">BACK</a></h1>
     {% for key, value in product.items %}
         <h3>{{key}}: {{value}}</h3>
     {% endfor %}
     <img style="height:200px; width:200px;" src="{{MEDIA_URL}}{{product.product_image}}" alt="" srcset="">
-    <a href="{% url 'addToCart' id=product.product_id%}">ADD TO CART {{product.product_id}}</a>
+
+    <div class="ratings">
+        {% for i in r1 %}
+            <span ><a href="{% url 'rateProduct' pid=product.product_id ratings=i %}"> <i class="fas fa-star rated" ></i></a></span>
+        {% endfor %}
+        {% for i in r2 %}
+        <span ><a href="{% url 'rateProduct' pid=product.product_id ratings=i %}"><i class="fas fa-star"></i></a></span>
+        {% endfor %}
+    </div>
+    
+    <a href="{% url 'addToCart' id=product.product_id%}">ADD TO CART</a>
+
+    <script>
+        
+    </script>
 </body>
 </html>
