@@ -105,7 +105,6 @@ def allProducts(request):
     context = {"products": all_products}
 
     recommended_result = recommend(request, 'home')
-    print(recommended_result)
     context["recommended_result"] = (recommended_result)
     return render(request, 'Buyer/all_products.html', context=context)
 

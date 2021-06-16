@@ -33,7 +33,7 @@
     <br>
     <h3>Recent Reviews</h3>
     {% if recommended_result.error_msg == "false" %}
-    {% for product in recommended_result.recently_reviewed %}
+    {% for product in recommended_result.recent %}
     <h3>Name:{{product.1}}</h3>
     <img src="https://res.cloudinary.com/anilbanskota/{{product.2}}">
     <h3>Price: NRs {{product.5}}</h3>
