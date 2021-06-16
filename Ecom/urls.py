@@ -26,11 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('Ecom1/', include('Ecom1.urls')),
     path('Buyer/', include('Buyer.urls')),
-    url(r'^media/(?P<path>.*)$', serve,
-        {'document_root': settings.MEDIA_ROOT}),
+
 ]
 
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # urlpatterns += static(settings.STATIC_URL,
 #                       document_root=settings.STATICFILES_DIRS)
