@@ -13,8 +13,9 @@ def recommend(request, page):
     uuu = request.session["b_id"]
     user_index = request.session["b_id"] - 1
     recommended_products = []
+    recently_reviewed = []
 
-    if Ratings.objects.filter(status__gt=4).count() > 4 and Ratings.objects.get(user_id=uuu).status > 4:
+    if Product.objects.all().count() > 5 and Ratings.objects.filter(status__gt=4).count() > 4 and Ratings.objects.get(user_id=uuu).status > 4:
         current_user = Ratings.objects.get(user_id=uuu)
         p_a = current_user.p_a
         p_b = current_user.p_b
@@ -74,7 +75,9 @@ def recommend(request, page):
         # print(recommended_products)
         cur.close()
         recommended_products.pop()
-        return {'error_msg': 'false', 'recommended_products': recommended_products}
+        for i in range(3):
+            recently_reviewed.append(recommended_products.pop(i))
+        return {'error_msg': 'false', 'recommended_products': recommended_products, 'recent':recently_reviewed}
     return {'error_msg': 'true', 'recommended_products': recommended_products}
 
 

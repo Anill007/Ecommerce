@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load cloudinary %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,7 +50,7 @@
         <td>{{order.5}}</td>
         <td>{{order.6}}</td>
         <td>{{order.7}}</td>
-        <td><img src="/media/{{order.8}}" alt="{{order.8}}" style="width: 100px; height:150px;"></td>
+        <td><img src="https://res.cloudinary.com/anilbanskota/{{order.8}}" alt="{{order.8}}" style="width: 100px; height:150px;"></td>
         <td>{{order.9}}</td>
         <td><a href="{% url 'updateRequestStatus' orderId=order.0 sellerId=order.2 status=order.5 action='next'%}">NEXT</a>
         <a href="{% url 'updateRequestStatus' orderId=order.0 sellerId=order.2 status=order.5 action='previous'%}">PREVIOUS</a></td>

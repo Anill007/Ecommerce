@@ -20,7 +20,7 @@
     {% if products %}
     {% for product in products %}
     <h3>Name:{{product.product_name}}</h3>
-    <img src="{{MEDIA_URL}}{{product.product_image}}">
+    <img src="https://res.cloudinary.com/anilbanskota/{{product.product_image}}">
     <h3>Price: NRs {{product.product_price}}</h3>
     <button><a href="{% url 'productDetails' id=product.product_id %}">DETAILS</a></button>
     <hr>
@@ -30,12 +30,24 @@
     {% endif %}
 
     <hr>
+    <br>
+    <h3>Recent Reviews</h3>
+    {% if recommended_result.error_msg == "false" %}
+    {% for product in recommended_result.recently_reviewed %}
+    <h3>Name:{{product.1}}</h3>
+    <img src="https://res.cloudinary.com/anilbanskota/{{product.2}}">
+    <h3>Price: NRs {{product.5}}</h3>
+    <button><a href="{% url 'productDetails' id=product.0 %}">DETAILS</a></button>
     <hr>
+    {% endfor %}
+    {% endif %}
+    <hr>
+    <br>
     <h3>Recommended Products</h3>
     {% if recommended_result.error_msg == "false" %}
         {% for product in recommended_result.recommended_products %}
         <h3>Name:{{product.1}}</h3>
-        <img src="{{MEDIA_URL}}{{product.2}}">
+        <img src="https://res.cloudinary.com/anilbanskota/{{product.2}}">
         <h3>Price: NRs {{product.5}}</h3>
         <button><a href="{% url 'productDetails' id=product.0 %}">DETAILS</a></button>
         <hr>

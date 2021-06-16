@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from Buyer.models import Order,Buyer
 from django.db import connection
 import shutil,os
+from cloudinary.forms import cl_init_js_callbacks 
 
 # ml modules
 import pandas as pd

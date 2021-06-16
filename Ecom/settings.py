@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import dj_database_url
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.api
+import cloudinary.uploader
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +45,7 @@ INSTALLED_APPS = [
     'Ecom1',
     'rest_framework',
     'Buyer',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -150,10 +154,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'https://res.cloudinary.com/anilbanskota/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+cloudinary.config(
+    cloud_name="anilbanskota",
+    api_key="613249992928882",
+    api_secret="4VmgqssStJq3FSYG3wPr3I98LrA"
+)
