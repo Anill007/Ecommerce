@@ -20,7 +20,7 @@
     {% if products %}
     {% for product in products %}
     <h3>Name:{{product.product_name}}</h3>
-    <img src="https://res.cloudinary.com/anilbanskota/{{product.product_image}}">
+    <img src="{{product.product_image}}">
     <h3>Price: NRs {{product.product_price}}</h3>
     <button><a href="{% url 'productDetails' id=product.product_id %}">DETAILS</a></button>
     <hr>

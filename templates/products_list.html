@@ -15,7 +15,7 @@
     {% for item in list%}
         <h3>ID: {{item.product_id}}</h3>
         <h3>NAME: {{item.product_name}}</h3>
-        <img style="height:200px; width:300px;" src="https://res.cloudinary.com/anilbanskota/{{item.product_image}}" alt="" srcset="">
+        <img style="height:200px; width:300px;" src="/media/{{item.product_image}}" alt="" srcset="">
         <h3>{{item.product_image}}</h3>
         <h3>DETAILS: {{item.product_details}}</h3>
         <h3>PRICE:{{item.product_price}}</h3>

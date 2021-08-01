@@ -20,8 +20,7 @@ class Seller(models.Model):
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=100)
-    product_image = CloudinaryField('image')
-    # product_image = models.ImageField()
+    product_image = models.ImageField()
     product_details = models.CharField(max_length=100)
     product_price = models.FloatField()
     product_model = models.CharField(max_length=100)
