@@ -22,7 +22,7 @@
     {% for key, value in product.items %}
         <h3>{{key}}: {{value}}</h3>
     {% endfor %}
-    <img style="height:200px; width:200px;" src="https://res.cloudinary.com/anilbanskota/{{product.product_image}}" alt="" srcset="">
+    <img style="height:200px; width:200px;" src="/media/{{product.product_image}}" alt="" srcset="">
 
     <div class="ratings">
         {% for i in r1 %}

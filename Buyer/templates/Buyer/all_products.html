@@ -11,6 +11,7 @@
             width:200px;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
 <body>
     <a href="{% url 'myCart' %}"><h1>GOTO MY CART</h1></a> 
@@ -18,13 +19,22 @@
         <h1>GOTO MY ORDERS</h1>
     </a>
     {% if products %}
-    {% for product in products %}
-    <h3>Name:{{product.product_name}}</h3>
-    <img src="{{product.product_image}}">
-    <h3>Price: NRs {{product.product_price}}</h3>
-    <button><a href="{% url 'productDetails' id=product.product_id %}">DETAILS</a></button>
-    <hr>
+
+    <div class="container">
+        <div class="row row-cols-3">
+    {% for product in products %}  
+        <div class="col" >
+            <h3>Name:{{product.product_name}}</h3>
+            <img src="/media/{{product.product_image}}">
+            <h3>Price: NRs {{product.product_price}}</h3>
+            <button><a href="{% url 'productDetails' id=product.product_id %}">DETAILS</a></button>
+        </div>
+    
     {% endfor %}
+        </div>
+    </div>
+
+
     {% else %}
     <h1>No any data</h1>
     {% endif %}
@@ -35,7 +45,7 @@
     {% if recommended_result.error_msg == "false" %}
     {% for product in recommended_result.recent %}
     <h3>Name:{{product.1}}</h3>
-    <img src="https://res.cloudinary.com/anilbanskota/{{product.2}}">
+    <img src="/media/{{product.2}}">
     <h3>Price: NRs {{product.5}}</h3>
     <button><a href="{% url 'productDetails' id=product.0 %}">DETAILS</a></button>
     <hr>
@@ -47,11 +57,13 @@
     {% if recommended_result.error_msg == "false" %}
         {% for product in recommended_result.recommended_products %}
         <h3>Name:{{product.1}}</h3>
-        <img src="https://res.cloudinary.com/anilbanskota/{{product.2}}">
+        <img src="/media/{{product.2}}">
         <h3>Price: NRs {{product.5}}</h3>
         <button><a href="{% url 'productDetails' id=product.0 %}">DETAILS</a></button>
         <hr>
         {% endfor %}
     {% endif %}   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
