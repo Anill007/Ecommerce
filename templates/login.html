@@ -7,28 +7,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eshopping</title>
     <link rel="stylesheet" href="{% static 'bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+
 </head>
 <body>
 
     <form onsubmit="event.preventDefault(); checkLoginType();" id="loginForm" method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="username"><br>
-        <input type="text" name="password" placeholder="password"><br>
+    <div class="tabs-div">
+        <div class="tabs-button">
+                <button class="tablink" onclick="openPage('login', this, 'green')" id="defaultOpen">Login </button>
+                <button class="tablink" onclick="openPage('signup', this, 'green')" >SignUp</button>
 
-        <input type="radio" id="buyer"  name="type" value="buyer" checked>
-        <label for="buyer">Buyer</label>
-        <input type="radio" id="seller" name="type" value="seller">
-        <label for="seller">Seller</label><br>
-
-        <input class="btn btn-danger" type="submit" value="LOGIN">
-    </form>
+        </div>
+    </div>
+      
     
-    <br>
-    <br>
-    <h1>Not a user yet. Sign Up</h1>
+
+    
+    <div id="login" class="tabcontent">
+              <div class="global-container">
+	<div class="card login-form">
+	<div class="card-body">
+		<h3 class="card-title text-center">Log In</h3>
+		<div class="card-text">
+			<!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+			<form>
+				<!-- to error: add class "has-danger" -->
+				<div class="form-group">
+					<label for="exampleInputEmail1">Username</label>
+					<input type="text" required name="username" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					{% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
+					<input type="password" required name="password" class="form-control form-control-sm" id="exampleInputPassword1">
+				</div>
+
+                <div class="mt-2">
+                    <input type="radio" id="buyer"  name="type" value="buyer" checked>
+                <label for="buyer">Buyer</label>
+                <input type="radio" id="seller" name="type" value="seller">
+                <label for="seller">Seller</label><br>
+
+                </div>
+				<button type="submit" class="btn btn-primary btn-block">Log in</button>
+				
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<div id="signup" class="tabcontent">
     <form action="/Ecom1/signup" method="post">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="username"><br>
+        {% comment %} <input type="text" name="username" placeholder="username"><br>
         <input type="text" name="password" placeholder="password"><br>
         <input type="text" name="repassword" placeholder="reenter password"><br>
 
@@ -37,10 +73,63 @@
         <input type="radio" id="seller" name="type" value="seller">
         <label for="seller">Seller</label><br>
 
-        <input class="btn btn-danger" type="submit" value="LOGIN">
-    </form>
-    
+        <input class="btn btn-danger" type="submit" value="LOGIN"> {% endcomment %}
 
+        <div class="global-container">
+	<div class="card login-form">
+	<div class="card-body">
+		<h3 class="card-title text-center">Sign Up</h3>
+		<div class="card-text">
+			<!--
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div> -->
+			<form>
+				<!-- to error: add class "has-danger" -->
+				<div class="form-group">
+					<label for="exampleInputEmail1">Username</label>
+					<input type="text" required name="username" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					{% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
+					<input type="password" required name="password" class="form-control form-control-sm" id="exampleInputPassword1">
+				</div>
+                <div class="form-group">
+					<label for="exampleInputPassword1">Repeat Password</label>
+					{% comment %} <a href="#" style="float:right;font-size:12px;">Forgot password?</a> {% endcomment %}
+					<input type="repassword" required name="password" class="form-control form-control-sm" id="exampleInputPassword1">
+				</div>
+
+                <div class="mt-2">
+                    <input type="radio" id="buyer"  name="type" value="buyer" checked>
+                <label for="buyer">Buyer</label>
+                <input type="radio" id="seller" name="type" value="seller">
+                <label for="seller">Seller</label><br>
+
+                </div>
+				<button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+				
+				
+			</form>
+		</div>
+	</div>
+</div>
+</div>
+
+
+    </form>
+
+
+
+</div
+
+
+</form>
+
+
+    
+<script>
+
+</script>
     <script>
         function checkLoginType(){
                 let loginType="";
@@ -54,6 +143,21 @@
                 loginForm.setAttribute("action",loginType);
                 loginForm.submit();
             }
+            function openPage(pageName,elmnt,color) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].style.backgroundColor = "";
+                }
+                document.getElementById(pageName).style.display = "block";
+                elmnt.style.backgroundColor = color;
+                }
+                document.getElementById("defaultOpen").click();
+
             
     </script>
     <script src="{% static 'bootstrap.js' %}"></script>

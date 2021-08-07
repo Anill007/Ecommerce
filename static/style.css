@@ -1,0 +1,75 @@
+
+
+.global-container{
+	height:100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+form{
+	padding-top: 10px;
+	font-size: 14px;
+	margin-top: 30px;
+}
+
+.card-title{ font-weight:300; }
+
+.btn{
+	font-size: 14px;
+	margin-top:20px;
+}
+
+
+.login-form{ 
+	width:330px;
+	margin:20px;
+}
+
+.sign-up{
+	text-align:center;
+	padding:20px 0 0;
+}
+
+.alert{
+	margin-bottom:-30px;
+	font-size: 13px;
+	margin-top:20px;
+}
+
+
+/* Style tab links */
+.tablink {
+	background-color: #555;
+	color: white;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	font-size: 17px;
+	width: 25%;
+  }
+  
+  .tablink:hover {
+	background-color: #777;
+  }
+  
+  /* Style the tab content (and add height:100% for full page content) */
+  .tabcontent {
+	display: none;
+	padding: 100px 20px;
+	height: 100%;
+  }
+
+  .tabs-button{
+	  width: 100%;
+	  text-align: center;
+	  margin-left: 25%;
+	  margin-right: 25%;
+	  
+  }
+  .tabs-div{
+	  width: auto;
+  }
+  
