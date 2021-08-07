@@ -42,27 +42,38 @@
     <hr>
     <br>
     <h3>Recent Reviews</h3>
+    <div class="container">
+        <div class="row row-cols-3">
     {% if recommended_result.error_msg == "false" %}
     {% for product in recommended_result.recent %}
+    <div class="col">
     <h3>Name:{{product.1}}</h3>
     <img src="/media/{{product.2}}">
     <h3>Price: NRs {{product.5}}</h3>
     <button><a href="{% url 'productDetails' id=product.0 %}">DETAILS</a></button>
-    <hr>
+</div>
     {% endfor %}
+    
     {% endif %}
+        </div>
+    </div>
     <hr>
     <br>
     <h3>Recommended Products</h3>
+    <div class="container">
+        <div class="row row-cols-3">
     {% if recommended_result.error_msg == "false" %}
         {% for product in recommended_result.recommended_products %}
+        <div class="col">
         <h3>Name:{{product.1}}</h3>
         <img src="/media/{{product.2}}">
         <h3>Price: NRs {{product.5}}</h3>
         <button><a href="{% url 'productDetails' id=product.0 %}">DETAILS</a></button>
-        <hr>
+        </div>
         {% endfor %}
     {% endif %}   
+    </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
