@@ -6,33 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop360</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <form action="{% url 'pAdd' %}" method="post" enctype="multipart/form-data">
+    <div class="container my-4" style="box-shadow: 8px 8px 20px gray;">
+    <a class="btn btn-outline-danger mx-4 mt-2" href="http://127.0.0.1:8000/Ecom1/allProducts/">BACK TO ALL PRODUCTS</a>
+    <form class="p-4" action="{% url 'pAdd' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="id_product_name">Product name:</label> 
-        <input type="text" name="product_name" maxlength="100" required id="id_product_name">
+        
+        <div class="form-group mb-3">
+            <label for="id_product_name">Product Name:</label>
+            <input name="product_name" type="text" class="form-control" id="id_product_name" required placeholder="Enter Product Name">
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_product_image">Image</label>
+            <input type="file" class="form-control" name="product_image" accept="image/*" required id="id_product_image">
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_product_details">Short Description</label>
+            <input type="textarea" class="form-control" name="product_details" maxlength="100" required id="id_product_details">
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_product_price">Price</label>
+            <input type="number" class="form-control" name="product_price" required id="id_product_price">
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_product_model">Model</label>
+            <input type="text" class="form-control" name="product_model" required id="id_product_model">
+          </div>
+          <div class="form-group mb-3">
+            <label for="id_product_price">Category</label>
+            <input type="text" class="form-control" name="product_category" required id="id_product_category">
+          </div>
 
-        <label for="id_product_image">Product image:</label> 
-        <input type="file" name="product_image" accept="image/*" required id="id_product_image">
-        
-        <label for="id_product_details">Product details:</label>
-        <input type="text" name="product_details" maxlength="100" required id="id_product_details">
-        
-        <label for="id_product_price">Product price:</label>
-        <input type="number" name="product_price" step="any" required id="id_product_price">
-        
-        <label for="id_product_model">Product model:</label>
-        <input type="text" name="product_model" maxlength="100" required id="id_product_model">
-        
-        <label for="id_product_category">Product category:</label> 
-        <input type="text" name="product_category" maxlength="50" required id="id_product_category">
-        
-        <label for="id_seller_id">Seller id:</label>
-        <select name="seller_id" required id="id_seller_id">
-                <option value="{{sid}}">{{sid}}</option> 
-        </select>
-        <input type="submit" value="ADD PRODUCT">
+          <label for="id_seller_id">Seller id:</label>
+        <select class="form-select mb-3" aria-label="Default select example" id="id_seller_id" name="seller_id">
+            <option selected value="{{sid}}">{{sid}}</option>
+          </select>
+          
+          <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

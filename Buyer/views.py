@@ -87,17 +87,19 @@ def recommended(request):
 
 
 def bLogin(request):
-    if(request.method == "POST" and request.POST["type"] == "buyer"):
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = Buyer.objects.get(
-            buyer_name=username, buyer_password=password)
-        if user:
-            request.session["b_id"] = user.buyer_id
-            return redirect("allProducts")
-        else:
-            return HttpResponse("No user found.")
-
+    try:
+        if(request.method == "POST" and request.POST["type"] == "buyer"):
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = Buyer.objects.get(
+                buyer_name=username, buyer_password=password)
+            if user:
+                request.session["b_id"] = user.buyer_id
+                return redirect("allProducts")
+            else:
+                return HttpResponse("No user found.")
+    except Exception as e:
+        return HttpResponse("No user found.")
 
 def logout(request):
    del request.session["b_id"]

@@ -12,6 +12,7 @@
 </head>
 <body>
 
+
     <form onsubmit="event.preventDefault(); checkLoginType();" id="loginForm" method="post">
         {% csrf_token %}
     <div class="tabs-div">
@@ -22,8 +23,6 @@
         </div>
     </div>
       
-    
-
     
     <div id="login" class="tabcontent">
               <div class="global-container">
@@ -106,9 +105,7 @@
                 <label for="seller">Seller</label><br>
 
                 </div>
-				<button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-				
-				
+				<button type="submit" class="btn btn-primary btn-block">Sign Up</button>				
 			</form>
 		</div>
 	</div>
@@ -125,11 +122,6 @@
 
 </form>
 
-
-    
-<script>
-
-</script>
     <script>
         function checkLoginType(){
                 let loginType="";

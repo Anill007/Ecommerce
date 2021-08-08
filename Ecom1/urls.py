@@ -17,6 +17,8 @@ urlpatterns = [
          views.orderRequests, name="orderRequests"),
     path('updateRequestStatus/<int:orderId>/<int:sellerId>/<str:status>/<str:action>/',
          views.updateRequestStatus, name="updateRequestStatus"),
+     
+    path('logout/', views.logout, name="logout"),
 
     # api
     path('products/', views.products),
