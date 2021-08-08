@@ -9,9 +9,7 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
 
 from django.core.wsgi import get_wsgi_application
 import os
-from whitenoise import WhiteNoise
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Ecom.settings')
 
 application = get_wsgi_application()
-application = WhiteNoise(application, root='staticfiles')
+# application = WhiteNoise(application, root='staticfiles')

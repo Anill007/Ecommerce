@@ -3,11 +3,8 @@ from Ecom1.models import Product, Seller
 from django.forms.models import model_to_dict
 from .models import Cart, Order, Buyer, Ratings
 from django.db import connection
-import pandas as pd
-from scipy import sparse
-from sklearn.metrics.pairwise import cosine_similarity
 # Create your views here.
-
+import pandas as pd
 
 def recommend(request, page):
     uuu = request.session["b_id"]
