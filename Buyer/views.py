@@ -237,3 +237,8 @@ def rateProduct(request, pid, ratings):
 
     cur.close()
     return redirect("productDetails", id=pid)
+
+
+def logout(request):
+    del request.session["b_id"]
+    return render(request, "login.html")

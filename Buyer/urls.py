@@ -17,4 +17,5 @@ urlpatterns = [
     path('rateProduct/<int:pid>/<int:ratings>',
          views.rateProduct, name="rateProduct"),
      path('recommended/', views.recommended, name="recommended"),
+     path('logout/', views.logout, name="logout"),
 ]
