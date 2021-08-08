@@ -5,24 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop360</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
 <body>
-    <h1><a href="{% url 'pAdd' %}">Add a new product.</a></h1>
-    <h1><a href="{% url 'orderRequests' %}">View Order Requests.</a></h1>
-    <h1>Products List</h1>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color:#fff !important" href="#">Ecommerce</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+            </ul>
+            <form class="d-flex">
+                {% comment %} <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}
+              <a class="btn btn-outline-primary mx-1" href="{% url 'pAdd' %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Add Product"><i class="fas fa-plus-square"></i></a> 
+              <a class="btn btn-outline-primary mx-1" href="{% url 'orderRequests' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Orders"><i class="fas fa-file-invoice"></i></a> 
+              <a href="http://127.0.0.1:8000/Ecom1/logout" class="btn btn-outline-danger mx-1" type="submit">Logout</a>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+    <div class="container mt-4">
+        <h3 class="btn btn-secondary">All Products</h3>
+        <div class="row row-cols-4 g-3">
     {% for item in list%}
-        <h3>ID: {{item.product_id}}</h3>
-        <h3>NAME: {{item.product_name}}</h3>
-        <img style="height:200px; width:300px;" src="/media/{{item.product_image}}" alt="" srcset="">
-        <h3>{{item.product_image}}</h3>
-        <h3>DETAILS: {{item.product_details}}</h3>
-        <h3>PRICE:{{item.product_price}}</h3>
-        <h3>MODEL:{{item.product_model}}</h3>
-        <h3>CATEGORY:{{item.product_category}}</h3>
-        <button><a href="{% url 'pUpdate' pk=item.product_id %}">EDIT</a></button>
-        <hr>
+        <div class="col">
+            <div class="card card-style">
+                <img src="/media/{{item.product_image}}" class="card-img-top" alt="{{item.product_name}}" style="height:200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Name:{{item.product_name}}</h5>
+                  <p class="card-text">Price: NRs {{item.product_price}}</p>
+                  <a class="btn btn-outline-primary" href="{% url 'pUpdate' pk=item.product_id %}">EDIT</a>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-    
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <script src="https://kit.fontawesome.com/108fa96efa.js" crossorigin="anonymous"></script>
 </body>
 </html>

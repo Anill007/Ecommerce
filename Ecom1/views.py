@@ -64,12 +64,15 @@ def sLogin(request):
     if(request.method == "POST" and request.POST["type"] == "seller"):
         username = request.POST["username"]
         password = request.POST["password"]
-        user = models.Seller.objects.get(
-            seller_name=username, seller_password=password)
-        if user:
-            request.session["id"] = user.seller_id
-            return redirect("plist")
-        else:
+        try: 
+            user = models.Seller.objects.get(
+                seller_name=username, seller_password=password)
+            if user:
+                request.session["id"] = user.seller_id
+                return redirect("plist")
+            else:
+                return HttpResponse("No user found.")
+        except Exception as e:
             return HttpResponse("No user found.")
 
 # 1.for getting all lists of products
@@ -257,7 +260,7 @@ def signUp(request):
                     ''' SELECT exists(select * from "Buyer_buyer" where buyer_name = %s) ''', [username, ])
                 res = cursor.fetchone()
                 if res[0]:
-                    return HttpResponse("user already exists.")
+                    return redirect("home")
                 else:
                     cursor.execute(''' INSERT INTO "Buyer_buyer"(buyer_name, buyer_password) values (%s,%s)''', [
                         username, password])
@@ -266,18 +269,22 @@ def signUp(request):
                     VALUES(%s, %s, %s)''',[new_buyer.buyer_id,new_buyer.buyer_name,0])
                     cursor.close()
                     addNewUser(username)
-                    return HttpResponse("Successfully Created")
+                    return redirect("home")
 
             elif type == "seller":
                 cursor.execute(
                     ''' SELECT exists(select * from "Ecom1_seller" where seller_name = %s) ''', [username, ])
                 res = cursor.fetchone()
                 if res[0]:
-                    return HttpResponse("user already exists.")
+                    return redirect("home")
                 else:
                     cursor.execute(''' INSERT INTO "Ecom1_seller"(seller_name, seller_password) values (%s,%s)''', [
                         username, password])
                     cursor.close()
-                    return HttpResponse("Successfully Created")
+                    return redirect("home")
         else:
             return HttpResponse("retype password.")
+
+def logout(request):
+    del request.session['id']
+    return redirect("home")
