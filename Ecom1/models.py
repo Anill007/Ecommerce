@@ -1,7 +1,4 @@
 from django.db import models
-import os
-from cloudinary.models import CloudinaryField
-
 # Create your models here.
 
 

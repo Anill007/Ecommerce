@@ -20,12 +20,12 @@ urlpatterns = [
      
     path('logout/', views.logout, name="logout"),
 
-    # api
-    path('products/', views.products),
-    path('product/<int:id>/', views.product),
+     # api
+     path('products/', views.products),
+     path('product/<int:id>/', views.product),
 
-    # myApis
-    path('api_products/', myApis.productListAPI),
-    path('api_product/', myApis.updateProductAPI)
+     # myApis
+     path('api_products/', myApis.productListAPI),
+     path('api_product/', myApis.updateProductAPI)
 
 ]

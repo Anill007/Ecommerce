@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-{% load cloudinary %}
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'newstyle.css'%}">
+
     <script src="https://kit.fontawesome.com/108fa96efa.js" crossorigin="anonymous"></script>
     <style>
         i{
@@ -18,25 +21,71 @@
     </style>
 </head>
 <body>
+
+
     <h1><a href="{% url 'allProducts' %}">BACK</a></h1>
-    {% for key, value in product.items %}
-        <h3>{{key}}: {{value}}</h3>
-    {% endfor %}
-    <img style="height:200px; width:200px;" src="/media/{{product.product_image}}" alt="" srcset="">
 
-    <div class="ratings">
-        {% for i in r1 %}
-            <span ><a href="{% url 'rateProduct' pid=product.product_id ratings=i %}"> <i class="fas fa-star rated" ></i></a></span>
-        {% endfor %}
-        {% for i in r2 %}
-        <span ><a href="{% url 'rateProduct' pid=product.product_id ratings=i %}"><i class="fas fa-star"></i></a></span>
-        {% endfor %}
+
+
+<main class="container">
+ 
+  <!-- Left Column / Headphones Image -->
+  <div class="left-column">
+    <img data-image="black" src="/media/{{product.product_image}}" alt="">
+    <img data-image="blue" src="/media/{{product.product_image}}" alt="">
+    <img data-image="red" class="active" src="/media/{{product.product_image}}" alt="">
+  </div>
+ 
+ 
+  <!-- Right Column -->
+  <div class="right-column">
+ 
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>{{product.product_category}}</span>
+      <h1>{{product.product_name}}</h1>
+      <p>{{product.product_details}}</p>
     </div>
-    
-    <a href="{% url 'addToCart' id=product.product_id%}">ADD TO CART</a>
-
-    <script>
+ 
+    <!-- Product Configuration -->
+    <div class="product-configuration">
+ 
+      <!-- Product Color -->
+          <!-- Cable Configuration -->
+      <div class="m-4">
+        <span>Ratings </span>
+ 
+        <div class="ratings" style="margin-top:10px">
+            {% for i in r1 %}
+                <span ><a href="{% url 'rateProduct' pid=product.product_id ratings=i %}"> <i class="fas fa-star rated" ></i></a></span>
+            {% endfor %}
+            {% for i in r2 %}
+            <span ><a href="{% url 'rateProduct' pid=product.product_id ratings=i %}"><i class="fas fa-star"></i></a></span>
+            {% endfor %}
+    </div>
+ 
+      </div>
+    </div>
+ 
+    <!-- Product Pricing -->
+    <div class="product-price" style="margin-top:10px">
+      <span>NRP {{product.product_price}}</span>
+      <a href="{% url 'addToCart' id=product.product_id%}" class="cart-btn">Add to cart</a>
+    </div>
+  </div>
+</main>
+     <script>
+       $(document).ready(function() {
+ 
+        $('.color-choose input').on('click', function() {
+            var headphonesColor = $(this).attr('data-image');
         
+            $('.active').removeClass('active');
+            $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
+            $(this).addClass('active');
+        });
+        
+        });
     </script>
 </body>
 </html>

@@ -1,12 +1,9 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import api_view
 from .models import *
-from .serializer import *
 
 
 @csrf_exempt
-@api_view(["GET"])
 def productListAPI(request):  # get multiple products
     if request.method == "GET":
         request.session["id"] = 4
@@ -17,7 +14,6 @@ def productListAPI(request):  # get multiple products
 
 
 @csrf_exempt
-@api_view(["GET", "POST"])
 def updateProductAPI(request):  # get single product and update on post
     if request.method == "GET":
         productId = request.query_params.get('productId')

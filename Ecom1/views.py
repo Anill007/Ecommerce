@@ -2,19 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from . import forms
 from . import models
-from . import serializer
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import api_view
 from Buyer.models import Order,Buyer
 from django.db import connection
 import shutil,os
-from cloudinary.forms import cl_init_js_callbacks 
-
-# ml modules
 import pandas as pd
-from scipy import sparse
-from sklearn.metrics.pairwise import cosine_similarity
-
+# ml modules
 # ml codes
 
 
@@ -198,7 +191,6 @@ def updateRequestStatus(request, orderId, sellerId, status, action):
 
 
 @csrf_exempt
-@api_view(['GET', 'POST'])
 def products(request):
     if request.method == "GET":
         all_products = models.Product.objects.all()
@@ -214,7 +206,6 @@ def products(request):
 
 
 @csrf_exempt
-@api_view(['PUT', 'DELETE'])
 def product(request, id):
     if request.method == "PUT":
         product = models.Product.objects.get(product_id=id)
