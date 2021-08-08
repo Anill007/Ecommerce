@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('login', views.bLogin, name="bLogin"),
+    path('logout', views.logout, name="logout"),
     path('allProducts/', views.allProducts, name="allProducts"),
     path('myCart/', views.myCart, name="myCart"),
     path('product/<int:id>/', views.productDetails, name="productDetails"),

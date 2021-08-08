@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 {% load cloudinary %}
+{% load static %}
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'bootstrap.css'%}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
         <title>Document</title>
         <style>
             table {
@@ -26,7 +31,9 @@
         </style>
     </head>
     <body>
-        <a href="{% url 'allProducts' %}">ALL PRODUCTS</a>
+        <a href="{% url 'allProducts' %}"><h3 class="btn btn-secondary"  style="margin:10px;">ALL PRODUCTS</h3></a>
+    
+        
         <table>
             <tr>
                 <th>Cart ID</th>
@@ -43,12 +50,15 @@
                     <td>{{item.1}}</td>
                     <td>{{item.2}}</td>
                     <td>{{item.3}}</td>
-                    <td>{{item.4}}</td>
                     <td>
-                        <a href="{% url 'updateQuantity' id=item.0 add=1 sub=0%}">INCREASE</a>
-                        <a href="{% url 'updateQuantity' id=item.0 add=0 sub=1 %}">DECREASE</a>
-                        <a href="{% url 'deleteCartItem' id=item.0 %}">DELETE</a>
-                        <a href="{% url 'confirmOrder' id=item.1 seller_id=item.3 cart_id=item.0 quantity=item.4%}">CONFIRM ORDER</a>
+                        <a href="{% url 'updateQuantity' id=item.0 add=0 sub=1 %}"><i class="bi bi-arrow-down-square" style="font-size:25px"></i></a>
+                             {{item.4}}
+                      <a href="{% url 'updateQuantity' id=item.0 add=1 sub=0%}"><i class="bi bi-arrow-up-square" style="font-size:25px"></i></a>
+                      
+                    </td>
+                    <td>
+                        <a href="{% url 'deleteCartItem' id=item.0 %}"><i class="bi bi-trash" style="font-size:25px"></i></a>
+                        <a href="{% url 'confirmOrder' id=item.1 seller_id=item.3 cart_id=item.0 quantity=item.4%}"><h4 class="btn btn-outline-primary" style="margin-left:30px">CONFIRM ORDER</h4></a>
                     </td>
                 </tr>
             {% endfor %}

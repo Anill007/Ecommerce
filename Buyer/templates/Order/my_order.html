@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+
     <title>Document</title>
     <style>
         table {
@@ -25,7 +30,9 @@
     </style>
 </head>
 <body>
-    <table>
+        <a href="{% url 'allProducts' %}"><h3 class="btn btn-secondary"  style="margin:10px;">Go Back</h3></a>
+
+    <table style="margin:10px;">
         <thead>
             <tr>
                 <td>Order ID</td>

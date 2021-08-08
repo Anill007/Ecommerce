@@ -99,6 +99,10 @@ def bLogin(request):
             return HttpResponse("No user found.")
 
 
+def logout(request):
+   del request.session["b_id"]
+   return redirect("login") 
+
 def allProducts(request):
     all_products = Product.objects.all()
     len(all_products)
